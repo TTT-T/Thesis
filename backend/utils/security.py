@@ -2,6 +2,10 @@ from dotenv import load_dotenv
 import os
 from datetime import datetime, timedelta
 from jose import jwt
+from fastapi import Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer
+from .jwt import decode_jwt  # หรือ .security ถ้าอยู่รวมกัน
+
 
 load_dotenv()  # <- ต้องอยู่ตรงนี้
 import bcrypt
@@ -41,3 +45,18 @@ def decode_jwt(token: str):
     except Exception as e:
         print("decode_jwt error:", e)
         return None
+
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
+
+def get_current_user(token: str = Depends(oauth2_scheme)):
+    payload = decode_jwt(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Token ไม่ถูกต้องหรือหมดอายุ")
+    return payload
+
+def create_jwt(data: dict, expires_delta: timedelta = None):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+    to_encode.update({"exp": expire})
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)

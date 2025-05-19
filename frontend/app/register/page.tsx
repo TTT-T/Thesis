@@ -58,7 +58,7 @@ export default function RegisterPage() {
       username: form.username,
       email: form.email,
       confirm_email: form.confirmEmail,
-      password: form.password,
+      hashed_password: form.password, 
       confirm_password: form.confirmPassword,
       id_card: form.id_card,
       phone: form.phone,
@@ -74,6 +74,7 @@ export default function RegisterPage() {
       postal_code: form.postal_code,
       blood_type: form.blood_type,
       rh_factor: form.rh_factor,
+      is_verified: false, 
     };
 
     try {

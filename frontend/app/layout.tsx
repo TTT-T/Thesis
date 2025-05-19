@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
+    
     <html lang="th">
       <body className="min-h-screen flex flex-col">
         <Navbar /> {/* ✅ ย้ายมาตรงนี้ถูกต้อง */}

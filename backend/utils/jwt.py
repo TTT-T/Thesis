@@ -26,3 +26,9 @@ def verify_jwt(token: str):
         print("JWT decode error:", e)
         return None
     
+def decode_jwt(token: str):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return payload
+    except jwt.PyJWTError:
+        return None
