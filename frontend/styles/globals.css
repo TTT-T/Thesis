@@ -1,32 +1,56 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@tailwind base;       /* นำเข้า base styles ของ Tailwind (reset/normalize CSS) */
+@tailwind components; /* นำเข้า component classes ของ Tailwind */
+@tailwind utilities;  /* นำเข้า utility classes ของ Tailwind */
 
-@import "@fontsource/sarabun/300.css";
-@import "@fontsource/sarabun/400.css";
-@import "@fontsource/sarabun/700.css";
+
+@import "@fontsource/sarabun/300.css"; /* นำเข้าไฟล์ฟอนต์ Sarabun น้ำหนัก 300 */
+@import "@fontsource/sarabun/400.css"; /* นำเข้าไฟล์ฟอนต์ Sarabun น้ำหนัก 400 */
+@import "@fontsource/sarabun/700.css"; /* นำเข้าไฟล์ฟอนต์ Sarabun น้ำหนัก 700 */
 
 /* ฟอร์ม input */
+/*# สร้างคลาส .input สำหรับตกแต่ง input form */
+
 .input {
-  @apply w-full border px-3 py-2 rounded dark:bg-gray-700 dark:text-white;
+  @apply w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600;
 }
+
+  /*# ใช้ Tailwind @apply รวม utility classes: */
+  /*# w-full: ความกว้างเต็มบรรทัด */
+  /*# border: มีเส้นขอบ */
+  /*# px-3: padding ซ้ายขวา 3 */
+  /*# py-2: padding บนล่าง 2 */
+  /*# rounded: มุมมน */
+  /*# dark:bg-gray-700: พื้นหลังเทาเข้มเมื่อ dark mode */
+  /*# dark:text-white: ตัวอักษรขาวเมื่อ dark mode */
+
 
 /* Theme Colors */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-sans: 'Sarabun', sans-serif;
+  --background: #ffffff; /*# กำหนดตัวแปรสีพื้นหลังปกติ (ขาว) */
+  --foreground: #171717; /*# กำหนดตัวแปรสีตัวอักษรปกติ (ดำเทา) */
+  --font-sans: 'Sarabun', sans-serif; /*# กำหนดตัวแปรฟอนต์หลัก Sarabun */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #171717;
-    --foreground: #ffffff;
+    --background: #171717; /*# เมื่อ dark mode: สีพื้นหลังดำเทา */
+    --foreground: #ffffff; /*# เมื่อ dark mode: สีตัวอักษรขาว */
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, sans-serif;
+  background: var(--background); /*# ใช้ตัวแปรสีพื้นหลังกับ body */
+  color: var(--foreground); /*# ใช้ตัวแปรสีตัวอักษรกับ body */
+  font-family: var(--font-sans), Arial, sans-serif; /*# ใช้ตัวแปรฟอนต์หลักกับ body */
 }
+
+/*# ---------------------------------------------------------------
+  # สรุปการทำงานของโค้ดนี้:
+  # 1. นำเข้า Tailwind CSS base, components, utilities เพื่อใช้ utility classes ได้ทั่วโปรเจกต์
+  # 2. นำเข้าไฟล์ฟอนต์ Sarabun น้ำหนัก 300, 400, 700 เพื่อใช้ฟอนต์นี้ในเว็บ
+  # 3. สร้างคลาส .input สำหรับตกแต่ง input form ให้สวยงามและรองรับ dark mode
+  # 4. กำหนดตัวแปร CSS สำหรับสีพื้นหลัง สีตัวอักษร และฟอนต์หลักใน :root
+  # 5. ใช้ media query ตรวจสอบ dark mode แล้วเปลี่ยนค่าตัวแปรสี
+  # 6. กำหนดให้ body ใช้ตัวแปรสีและฟอนต์ที่ประกาศไว้ ทำให้ทั้งเว็บเปลี่ยนธีมได้อัตโนมัติตาม system
+  # ตัวแปร --background, --foreground, --font-sans ถูกนำไปใช้ใน body และมีผลกับทุก element ลูกของ body
+  # หาก dark mode ถูกเปิด ตัวแปรใน :root จะถูก override ด้วยค่าที่อยู่ใน media query */
